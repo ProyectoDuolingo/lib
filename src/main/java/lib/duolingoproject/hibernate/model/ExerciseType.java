@@ -12,11 +12,27 @@ import javax.persistence.Table;
 public class ExerciseType {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int _id;
+	private int id;
 	
-	@Column(name = "exercise_name")
-	private String _exerciseName;
+	@Column(name = "exercise_name", unique = true)
+	private String exerciseName;
+	
+	@Column(name = "xp_points")
+	private int xpPoints;
+	
+	public ExerciseType(int id, String exerciseName, int xpPoints) {
+		this.id = id;
+		this.exerciseName = exerciseName;
+		this.xpPoints = xpPoints;
+	}
+
+	public ExerciseType(String exerciseName) {
+		
+		this.exerciseName = exerciseName;
+	}	
+	
+	
 
 }

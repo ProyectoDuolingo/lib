@@ -1,6 +1,7 @@
 package lib.duolingoproject.hibernate.util;
 
-import lib.duolingoproject.hibernate.model.User;
+import lib.duolingoproject.hibernate.model.*;
+import lib.duolingoproject.hibernate.model.association.*;
 
 import java.util.Properties;
 
@@ -20,7 +21,7 @@ public class HibernateUtil {
                 // Hibernate settings equivalent to hibernate.cfg.xml's properties
                 Properties settings = new Properties();
                 settings.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
-                settings.put(Environment.URL, "jdbc:mysql://localhost:3306/test1?serverTimezone=UTC");
+                settings.put(Environment.URL, "jdbc:mysql://localhost:3306/test2?serverTimezone=UTC");
                 settings.put(Environment.USER, "adminDuolingo");
                 settings.put(Environment.PASS, "P@ssw0rd");
                 settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
@@ -33,12 +34,28 @@ public class HibernateUtil {
 
                 configuration.setProperties(settings);
                 
-                //configuration.addAnnotatedClass(Table1.class);
                 configuration.addAnnotatedClass(User.class);
+                configuration.addAnnotatedClass(Language.class);
+                configuration.addAnnotatedClass(Course.class);
+                configuration.addAnnotatedClass(CourseType.class);
+                configuration.addAnnotatedClass(Category.class);
+                configuration.addAnnotatedClass(Level.class);
+                configuration.addAnnotatedClass(ExerciseType.class);
+                configuration.addAnnotatedClass(ExerciseCompleteWord.class);
+                configuration.addAnnotatedClass(ExerciseMatchWords.class);
+                configuration.addAnnotatedClass(ExerciseOpenTraduction.class);
+                configuration.addAnnotatedClass(ExerciseReorderWords.class);
+                configuration.addAnnotatedClass(ExerciseTest.class);
+                configuration.addAnnotatedClass(Division.class);
+                configuration.addAnnotatedClass(League.class);
+                configuration.addAnnotatedClass(ShopItem.class);
+                
+                configuration.addAnnotatedClass(UserCourse.class);
+                configuration.addAnnotatedClass(UserShop.class);
 
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                         .applySettings(configuration.getProperties()).build();
-                
+
                 sessionFactory = configuration.buildSessionFactory(serviceRegistry);
             } catch (Exception e) {
                 e.printStackTrace();

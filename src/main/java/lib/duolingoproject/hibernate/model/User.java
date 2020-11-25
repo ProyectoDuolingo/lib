@@ -1,13 +1,22 @@
 package lib.duolingoproject.hibernate.model;
 
+import lib.duolingoproject.hibernate.model.association.UserCourse;
+
 import java.io.File;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -15,133 +24,102 @@ import javax.persistence.Table;
 public class User {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private long _id;
+	private long id;
 	
-	@Column(name = "nickname")
-	private String _nickname;
+	@Column(name = "nickname", unique = true)
+	private String nickname;
 	
-	@Column(name = "email")
-	private String _email;
+	@Column(name = "email", unique = true)
+	private String email;
 	
 	@Column(name = "password")
-	private String _password;
+	private String password;
 	
-	@Column(name = "birthdate")
-	private Date _birthdate;
+	@Column(name = "birth_date")
+	private Date birthdate;
 	
 	@Column(name = "avatar")
-	private File _avatar;
+	private File avatar;
 	
 	@Column(name = "genre")
-	private String _genre;
+	private String genre;
 	
 	@Column(name = "register_date")
-	private Date _registerDate;
+	private Date registerDate;
 	
 	@Column(name = "xp_points")
-	private int _xpPoints;
+	private int xpPoints;
 	
 	@Column(name = "coins")
-	private int _coins;
+	private int coins;
 	
 	@Column(name = "lifes")
-	private int _lifes;
+	private int lifes;
 	
 	@Column(name = "streak_days")
-	private int _streakDays;
+	private int streakDays;
 	
-	private League _league;
+	@OneToMany(mappedBy = "course")
+	private Set<UserCourse> userCourses; 
 	
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "active_course_id")
+	private Course activeCourse;
+	
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "league_id")
+	private League league;
+	
+	@ManyToMany
+	@JoinTable(
+		name = "friends",
+		joinColumns =  { @JoinColumn(name = "following_id") },
+		inverseJoinColumns = { @JoinColumn(name = "follower_id") }
+	)	
+	private Set<User> followers;
+	
+	@ManyToMany
+	@JoinTable(
+			name = "friends",
+			joinColumns =  { @JoinColumn(name = "follower_id") },
+			inverseJoinColumns = { @JoinColumn(name = "following_id") }
+		)	
+	private Set<User> following;
+	
+
 	public User() {
-		super();
 		
 	}
 	
-	public User(long _id, String _nickname, String _email, Date _birthdate, File _avatar, String _genre,
-			Date _registerDate, int _xpPoints, int _coins, int _lifes, int _streakDays) {
-		super();
-		this._id = _id;
-		this._nickname = _nickname;
-		this._email = _email;
-		this._birthdate = _birthdate;
-		this._avatar = _avatar;
-		this._genre = _genre;
-		this._registerDate = _registerDate;
-		this._xpPoints = _xpPoints;
-		this._coins = _coins;
-		this._lifes = _lifes;
-		this._streakDays = _streakDays;
-	}
-
-	public long getId() {
-		return _id;
-	}
-	public String getNickname() {
-		return _nickname;
-	}
-	public String getEmail() {
-		return _email;
-	}
-	public Date getBirthdate() {
-		return _birthdate;
-	}
-	public File getAvatar() {
-		return _avatar;
-	}
-	public String getGenre() {
-		return _genre;
-	}
-	public Date getRegisterDate() {
-		return _registerDate;
-	}
-	public int getXpPoints() {
-		return _xpPoints;
-	}
-	public int getCoins() {
-		return _coins;
-	}
-	public int getLifes() {
-		return _lifes;
-	}
-	public int getStreakDays() {
-		return _streakDays;
-	}
-	public void setId(long _id) {
-		this._id = _id;
-	}
-	public void setNickname(String _nickname) {
-		this._nickname = _nickname;
-	}
-	public void setEmail(String _email) {
-		this._email = _email;
-	}
-	public void setBirthdate(Date _birthdate) {
-		this._birthdate = _birthdate;
-	}
-	public void setAvatar(File _avatar) {
-		this._avatar = _avatar;
-	}
-	public void setGenre(String _genre) {
-		this._genre = _genre;
-	}
-	public void setRegisterDate(Date _registerDate) {
-		this._registerDate = _registerDate;
-	}
-	public void setXpPoints(int _xpPoints) {
-		this._xpPoints = _xpPoints;
-	}
-	public void setCoins(int _coins) {
-		this._coins = _coins;
-	}
-	public void setLifes(int _lifes) {
-		this._lifes = _lifes;
-	}
-	public void setStreakDays(int _streakDays) {
-		this._streakDays = _streakDays;
+	public User(String nickname) {
+		
+		this.nickname = nickname;
+		this.userCourses = new HashSet<UserCourse>();
+		this.followers = new HashSet<User>();
+		this.following = new HashSet<User>();
+		
 	}
 	
+	public void followUser(User followingUser) {
+		
+		this.following.add(followingUser);
+		
+		followingUser.followers.add(this);
+		
+	}
 	
+	public Set<User> getFollowers() {
+		
+		return this.followers;
+		
+	}
+	
+	public void addUserCourse(UserCourse userCourse) {
+		
+		this.userCourses.add(userCourse);
+	
+	}
 
 }

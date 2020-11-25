@@ -12,14 +12,21 @@ import javax.persistence.Table;
 public class ShopItem {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int _id;
+	private int id;
 	
-	@Column(name = "shop_item_name")
-	private String _shopItemName;
+	@Column(name = "shop_itemname", unique = true)
+	private String shopItemName;
 	
 	@Column(name = "price")
 	private int price;
+	
+	public ShopItem(String shopItemName, int price) {
+		
+		this.shopItemName = shopItemName;
+		this.price = price;
+		
+	}
 	
 }

@@ -1,5 +1,6 @@
 package lib.duolingoproject.hibernate.dao;
 
+import lib.duolingoproject.hibernate.dao.i.IUserDao;
 import lib.duolingoproject.hibernate.model.User;
 import lib.duolingoproject.hibernate.util.HibernateUtil;
 

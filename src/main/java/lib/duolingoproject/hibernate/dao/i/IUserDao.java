@@ -1,4 +1,4 @@
-package lib.duolingoproject.hibernate.dao;
+package lib.duolingoproject.hibernate.dao.i;
 
 import java.util.List;
 
