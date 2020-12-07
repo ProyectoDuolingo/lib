@@ -62,5 +62,11 @@ public class CourseType {
 		this.courses.add(course);
 		
 	}
+	
+	public void addCategory(Category category) {
+		
+		this.categories.add(category);
+		
+	}
 
 }

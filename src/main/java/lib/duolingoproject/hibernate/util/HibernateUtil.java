@@ -41,11 +41,7 @@ public class HibernateUtil {
                 configuration.addAnnotatedClass(Category.class);
                 configuration.addAnnotatedClass(Level.class);
                 configuration.addAnnotatedClass(ExerciseType.class);
-                configuration.addAnnotatedClass(ExerciseCompleteWord.class);
-                configuration.addAnnotatedClass(ExerciseMatchWords.class);
-                configuration.addAnnotatedClass(ExerciseOpenTraduction.class);
-                configuration.addAnnotatedClass(ExerciseReorderWords.class);
-                configuration.addAnnotatedClass(ExerciseTest.class);
+                configuration.addAnnotatedClass(Exercise.class);
                 configuration.addAnnotatedClass(Division.class);
                 configuration.addAnnotatedClass(League.class);
                 configuration.addAnnotatedClass(ShopItem.class);

@@ -7,24 +7,16 @@ import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.Table;
 
-@Entity
-@DiscriminatorValue("2")
-@Table(name = "exercise_match_words")
 public class ExerciseMatchWords extends Exercise {
 
-	@Column(name = "word1")
 	private String word1;
 	
-	@Column(name = "word2")
 	private String word2;
 	
-	@Column(name = "word3")
 	private String word3;
 	
-	@Column(name = "word4")
 	private String word4;
 	
-	@Column(name = "word5")
 	private String word5;
 	
 	public ExerciseMatchWords() {

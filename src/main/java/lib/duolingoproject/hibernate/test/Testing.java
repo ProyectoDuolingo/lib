@@ -59,15 +59,19 @@ public class Testing {
 		
 		UserCourse userCourse1 = new UserCourse(u1, course2);
 		UserCourse userCourse2 = new UserCourse(u2, course1);
+		UserCourse userCourse3 = new UserCourse(u3, course1);
 		
 		u1.addUserCourse(userCourse1);
 		u2.addUserCourse(userCourse2);
+		u3.addUserCourse(userCourse3);
 		
 		course2.addUserCourse(userCourse1);
 		course1.addUserCourse(userCourse2);
+		course1.addUserCourse(userCourse3);
 		
 		userCourseManager.saveUserCourse(userCourse1);
 		userCourseManager.saveUserCourse(userCourse2);
+		userCourseManager.saveUserCourse(userCourse3);
 		
 		
 		

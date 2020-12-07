@@ -11,9 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.MapsId;
 
-//@MappedSuperclass
 @Entity
-public abstract class Exercise {
+public class Exercise {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
