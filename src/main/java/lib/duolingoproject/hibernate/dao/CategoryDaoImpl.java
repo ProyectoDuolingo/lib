@@ -52,7 +52,7 @@ public class CategoryDaoImpl implements ICategoryDao{
 		
 	}
 	
-	public List<Category> getAllCategories() {
+	public List<Category> getAllCategoriesByCourseId(long id) {
 		
 		Transaction transaction = null;
 		
@@ -65,7 +65,7 @@ public class CategoryDaoImpl implements ICategoryDao{
 			transaction = session.beginTransaction();
 			
 			// Get Categorys list
-			categoriesList = session.createQuery("from category").list();
+			categoriesList = session.createQuery("from category where course id = " + id).list();
 			
 			// Commit the transaction
 			

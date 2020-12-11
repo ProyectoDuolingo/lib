@@ -25,11 +25,15 @@ public class Level {
 	@JoinColumn(name = "category_id")
 	private Category category;
 	
+	@Column(name = "level_name")
+	private String levelName;
+	
 	@OneToMany(mappedBy = "level")
 	private List<Exercise> exercises;
 	
-	public Level(Category category) {
+	public Level(String levelName, Category category) {
 		
+		this.levelName = levelName;
 		this.category = category;
 		this.exercises = new ArrayList<Exercise>();
 	}
@@ -69,6 +73,38 @@ public class Level {
 			// TODO Auto-generated method stub
 			return super.equals(obj);
 		}
+	}
+
+	public LevelId getId() {
+		return id;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public String getLevelName() {
+		return levelName;
+	}
+
+	public List<Exercise> getExercises() {
+		return exercises;
+	}
+
+	public void setId(LevelId id) {
+		this.id = id;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public void setLevelName(String levelName) {
+		this.levelName = levelName;
+	}
+
+	public void setExercises(List<Exercise> exercises) {
+		this.exercises = exercises;
 	}
 
 }

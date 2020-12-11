@@ -37,7 +37,6 @@ public class HibernateUtil {
                 configuration.addAnnotatedClass(User.class);
                 configuration.addAnnotatedClass(Language.class);
                 configuration.addAnnotatedClass(Course.class);
-                configuration.addAnnotatedClass(CourseType.class);
                 configuration.addAnnotatedClass(Category.class);
                 configuration.addAnnotatedClass(Level.class);
                 configuration.addAnnotatedClass(ExerciseType.class);

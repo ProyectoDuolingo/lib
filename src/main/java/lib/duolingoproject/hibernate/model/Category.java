@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -34,33 +35,24 @@ public class Category {
 	@Column(name = "final_level")
 	private int finalLevel;
 	
-	@ManyToMany(mappedBy = "categories")
-	private Set<CourseType> courseTypes;
-	
 	@OneToMany(mappedBy = "category")
 	private List<Level> levels;
+	
+	@ManyToOne
+	@JoinColumn(name = "course_id")
+	private Course course;
 	
 	public Category() {
 		
 	}
 	
-	public Category(String categoryName) {
+	public Category(String categoryName, Course course) {
 		this.categoryName = categoryName;
 		this.initialLevel = 1;
 		this.finalLevel = 5;
-		this.courseTypes = new HashSet<CourseType>();
 		this.levels = new ArrayList<Level>();
+		this.course = course;
 		
-	}
-
-	public Category(long id, String categoryName, int initialLevel, int finalLevel, Set<CourseType> courseTypes, List<Level> levels) {
-		super();
-		this.id = id;
-		this.categoryName = categoryName;
-		this.initialLevel = initialLevel;
-		this.finalLevel = finalLevel;
-		this.courseTypes = courseTypes;
-		this.levels = levels;
 	}
 	
 	public void addLevel(Level level) {
@@ -68,12 +60,54 @@ public class Category {
 		this.levels.add(level);
 		
 	}
-	
-	public void addCourseType(CourseType courseType) {
-		
-		this.courseTypes.add(courseType);
-		
+
+	public long getId() {
+		return id;
 	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public int getInitialLevel() {
+		return initialLevel;
+	}
+
+	public int getFinalLevel() {
+		return finalLevel;
+	}
+
+	public List<Level> getLevels() {
+		return levels;
+	}
+
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
+	public void setInitialLevel(int initialLevel) {
+		this.initialLevel = initialLevel;
+	}
+
+	public void setFinalLevel(int finalLevel) {
+		this.finalLevel = finalLevel;
+	}
+
+	public void setLevels(List<Level> levels) {
+		this.levels = levels;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
+	}	
 	
 	
 

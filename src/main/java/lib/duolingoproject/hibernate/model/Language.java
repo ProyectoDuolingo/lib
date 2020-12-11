@@ -29,11 +29,35 @@ public class Language {
 		super();
 	}
 
-	public Language(String languageName) {
+	public Language(String languageName, String code) {
 		
 		this.languageName = languageName;
+		this.code = code;
+		
 	}
-	
-	
+
+	public int getId() {
+		return id;
+	}
+
+	public String getLanguageName() {
+		return languageName;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setLanguageName(String languageName) {
+		this.languageName = languageName;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
 		
 }

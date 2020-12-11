@@ -12,10 +12,5 @@ public class ExerciseReorderWords extends Exercise {
 	public ExerciseReorderWords() {
 		super();
 	}
-
-	public ExerciseReorderWords(Level level, ExerciseType exerciseType, String phrase) {
-		super(level, exerciseType);
-		this.phrase = phrase;
-	}
 	
 }

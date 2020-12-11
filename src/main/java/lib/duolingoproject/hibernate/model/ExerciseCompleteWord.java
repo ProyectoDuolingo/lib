@@ -13,13 +13,6 @@ public class ExerciseCompleteWord extends Exercise {
 	
 	public ExerciseCompleteWord() {
 		super();
-	}
-
-	public ExerciseCompleteWord(Level level, ExerciseType exerciseType, String phrase, String word) {
-		super(level, exerciseType);
-		this.phrase = phrase;
-		this.word = word;
 	}	
-	
 	
 }

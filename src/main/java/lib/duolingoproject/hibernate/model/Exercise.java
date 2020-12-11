@@ -1,6 +1,9 @@
 package lib.duolingoproject.hibernate.model;
 
+import java.util.Map;
+
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,8 +13,14 @@ import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.MapsId;
+import javax.persistence.Table;
+
+import org.json.JSONObject;
+
+import lib.duolingoproject.hibernate.util.JSONObjectConverter;
 
 @Entity
+@Table(name =  "exercise")
 public class Exercise {
 	
 	@Id
@@ -31,15 +40,22 @@ public class Exercise {
 	@JoinColumn(name = "exercise_type_id")
 	private ExerciseType exerciseType;
 	
+	@Column(name = "content")
+	@Convert(converter = JSONObjectConverter.class)
+	private JSONObject exerciseContent;
+	
 	public Exercise() {
 		
 	}	
 
-	public Exercise(Level level, ExerciseType exerciseType) {
+	public Exercise(Level level, ExerciseType exerciseType, JSONObject exerciseContent) {
 		
 		this.level = level;
 		this.exerciseType = exerciseType;
+		this.exerciseContent = exerciseContent;
+		
 	}
 	
-
+	
+	
 }

@@ -12,10 +12,5 @@ public class ExerciseOpenTraduction extends Exercise {
 	public ExerciseOpenTraduction() {
 		super();
 	}
-
-	public ExerciseOpenTraduction(Level level, ExerciseType exerciseType, String phrase) {
-		super(level, exerciseType);
-		this.phrase = phrase;
-	}	
-
+	
 }
