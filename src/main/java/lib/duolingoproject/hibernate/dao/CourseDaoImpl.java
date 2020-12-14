@@ -85,6 +85,47 @@ public class CourseDaoImpl implements ICourseDao{
 		
 	}
 	
+	public List<Course> getAllCoursesByLanguagesId(long languageBaseId, long languageCourseId) {
+		
+		String id1, id2;
+		
+		if (languageBaseId == 0) {
+			
+			id1 = "language_base_id";
+			
+		} else {
+			
+			id1 = String.valueOf(languageBaseId);
+			
+		}
+		
+		if (languageCourseId == 0) {
+			
+			id2 = "language_course_id";
+			
+		} else {
+			
+			id2 = String.valueOf(languageCourseId);
+			
+		}		
+		
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+		
+			// Get Courses list
+			List<Course> coursesList = session.createSQLQuery("select * from course where language_base_id = " + id1 + " and language_course_id = " + id2).addEntity(Course.class).list();
+			
+			return coursesList;
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			
+			return null;
+				
+		}
+		
+	}
+	
 	public void saveCourse(Course course) {
 		
 		Transaction transaction = null;

@@ -52,36 +52,22 @@ public class LevelDaoImpl implements ILevelDao{
 		
 	}
 	
-	public List<Level> getAllLevels() {
-		
-		Transaction transaction = null;
-		
-		List<Level> levelsList = null;
+	public List<Level> getAllLevelsByCategoryId(long id) {
 		
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-			
-			// Start the transaction
-			
-			transaction = session.beginTransaction();
-			
+						
 			// Get Levels list
-			levelsList = session.createQuery("from level").list();
+			List<Level> levelsList = session.createSQLQuery("select * from level where category_id = " + id).addEntity(Level.class).list();
 			
-			// Commit the transaction
-			
-			transaction.commit();
+			return levelsList;
 			
 		} catch (Exception e) {
 			
-			if (transaction != null) {
-				
-				transaction.rollback();
-				
-			}
+			e.printStackTrace();
+			
+			return null;
 			
 		}
-		
-		return levelsList;
 		
 	}
 	

@@ -1,6 +1,7 @@
 package lib.duolingoproject.hibernate.util;
 
 import lib.duolingoproject.hibernate.model.*;
+import lib.duolingoproject.hibernate.model.Level.LevelId;
 import lib.duolingoproject.hibernate.model.association.*;
 
 import java.util.Properties;
@@ -30,7 +31,7 @@ public class HibernateUtil {
 
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
 
-                settings.put(Environment.HBM2DDL_AUTO, "create");
+                settings.put(Environment.HBM2DDL_AUTO, "update");
 
                 configuration.setProperties(settings);
                 
@@ -39,6 +40,7 @@ public class HibernateUtil {
                 configuration.addAnnotatedClass(Course.class);
                 configuration.addAnnotatedClass(Category.class);
                 configuration.addAnnotatedClass(Level.class);
+                configuration.addAnnotatedClass(LevelId.class);
                 configuration.addAnnotatedClass(ExerciseType.class);
                 configuration.addAnnotatedClass(Exercise.class);
                 configuration.addAnnotatedClass(Division.class);

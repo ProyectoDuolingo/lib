@@ -1,6 +1,7 @@
 package lib.duolingoproject.hibernate.dao;
 
-import lib.duolingoproject.hibernate.dao.i.IExerciseTestDao;
+import lib.duolingoproject.hibernate.dao.i.IExerciseDao;
+import lib.duolingoproject.hibernate.model.Exercise;
 import lib.duolingoproject.hibernate.model.ExerciseTest;
 import lib.duolingoproject.hibernate.util.HibernateUtil;
 
@@ -10,82 +11,51 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 
-public class ExerciseTestDaoImpl implements IExerciseTestDao{
+public class ExerciseDaoImpl implements IExerciseDao{
 	
-	// saveExerciseTest
-	// getAllExerciseTests
-	// getExerciseTestById
-	// updateExerciseTest
-	// deleteExerciseTestById
+	// saveExerciseCompleteWord
+	// getAllExerciseCompleteWords
+	// getExerciseCompleteWordById
+	// updateExerciseCompleteWord
+	// deleteExerciseCompleteWordById
 	
-	public ExerciseTest getExerciseTestById(long id) {
-		
-		Transaction transaction = null;
-		
-		ExerciseTest exerciseTest = null;
-		
+	public List<Exercise> getExercisesByLevelIdAndTypeId(long idLevel, long idType) {
+	
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-			
-			// Start the transaction
-			
-			transaction = session.beginTransaction();
-			
-			// Get ExerciseTest object
-			
-			exerciseTest = session.get(ExerciseTest.class, id);
-			
-			// Commit the transaction
-			
-			transaction.commit();
+				
+			List<Exercise> exercises = session.createSQLQuery("select * from exercise where category_id = " + idLevel + " and exercise_type_id = " + idType).addEntity(Exercise.class).list();
+					
+			return exercises;
 			
 		} catch (Exception e) {
 			
-			if (transaction != null) {
-				
-				transaction.rollback();
-				
-			}
+			e.printStackTrace();
+			
+			return null;
 			
 		}
 		
-		return exerciseTest;
-		
 	}
 	
-	public List<ExerciseTest> getAllExercisesTest() {
-		
-		Transaction transaction = null;
-		
-		List<ExerciseTest> exercisesTestList = null;
+	public List<Exercise> getAllExercisesByLevelId(long idLevel) {
 		
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 			
-			// Start the transaction
-			
-			transaction = session.beginTransaction();
-			
-			// Get ExerciseTest list
-			exercisesTestList = session.createQuery("from exercise_test").list();
-			
-			// Commit the transaction
-			
-			transaction.commit();
+			List<Exercise> exercises = session.createSQLQuery("select * from exercise where category_id = " + idLevel).addEntity(Exercise.class).list();
+					
+			return exercises;
 			
 		} catch (Exception e) {
 			
-			if (transaction != null) {
-				
-				transaction.rollback();
-				
-			}
+			e.printStackTrace();
+			
+			return null;
 			
 		}
 		
-		return exercisesTestList;
-		
 	}
 	
-	public void saveExerciseTest(ExerciseTest exerciseTest) {
+	public void saveExercise(Exercise exercise) {
 		
 		Transaction transaction = null;
 		
@@ -95,9 +65,9 @@ public class ExerciseTestDaoImpl implements IExerciseTestDao{
 			
 			transaction = session.beginTransaction();
 			
-			// Save ExerciseTest object
+			// Save ExerciseCompleteWord object
 			
-			session.save(exerciseTest);
+			session.save(exercise);
 			
 			// Commit the transaction
 			
@@ -115,7 +85,7 @@ public class ExerciseTestDaoImpl implements IExerciseTestDao{
 		
 	}
 	
-	public void updateExerciseTest(ExerciseTest exerciseTest) {
+	public void updateExercise(Exercise exercise) {
 		
 		Transaction transaction = null;
 		
@@ -125,9 +95,9 @@ public class ExerciseTestDaoImpl implements IExerciseTestDao{
 			
 			transaction = session.beginTransaction();
 			
-			// Save ExerciseTest object
+			// Save ExerciseCompleteWord object
 			
-			session.saveOrUpdate(exerciseTest);
+			session.saveOrUpdate(exercise);
 			
 			// Commit the transaction
 			
@@ -145,11 +115,11 @@ public class ExerciseTestDaoImpl implements IExerciseTestDao{
 		
 	}
 	
-	public void deleteExerciseTestById(long id) {
+	public void deleteExerciseById(long id) {
 		
 		Transaction transaction = null;
 		
-		ExerciseTest exerciseTest = null;
+		Exercise exercise = null;
 		
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 			
@@ -157,11 +127,11 @@ public class ExerciseTestDaoImpl implements IExerciseTestDao{
 			
 			transaction = session.beginTransaction();
 			
-			// Get ExerciseTest object
-			exerciseTest = session.get(ExerciseTest.class, id);
+			// Get ExerciseCompleteWord object
+			exercise = session.get(Exercise.class, id);
 			
-			// Delete ExerciseTest object
-			session.delete(exerciseTest);
+			// Delete ExerciseCompleteWord object
+			session.delete(exercise);
 			
 			// Commit the transaction
 			transaction.commit();

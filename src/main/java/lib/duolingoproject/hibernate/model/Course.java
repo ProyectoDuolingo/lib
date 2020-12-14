@@ -112,4 +112,10 @@ public class Course {
 		this.courseUsers = courseUsers;
 	}
 	
+	public String toString() {
+		
+		return languageBase.getLanguageName() + " - " + languageCourse.getLanguageName();
+		
+	}
+	
 }

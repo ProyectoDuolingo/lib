@@ -27,21 +27,32 @@ public class JSONObjectConverter implements AttributeConverter<JSONObject, Strin
 	@Override
 	public JSONObject convertToEntityAttribute(String jsonString) {
 		
-		JSONObject jsonData;
+		JSONObject json;
 		
 		try {
 			
-			jsonData = new JSONObject(jsonString);
+			json = new JSONObject(jsonString);
 			
 		} catch (Exception e) {
 			
-			jsonData = null;
+			json = null;
 			
 		}
 		
-		return jsonData;
+		return json;
 	}
 	
-	
+	public JSONObject createExerciseTestJSON(String original, String translated, String mistake1, String mistake2) {
+		
+		JSONObject content = new JSONObject();
+		
+		content.put("phraseOriginal", original);
+		content.put("phraseTranslated", translated);
+		content.put("phraseMistake1", mistake1);
+		content.put("phraseMistake2", mistake2);
+		
+		return content;
+		
+	}
 
 }

@@ -28,6 +28,15 @@ public class Language {
 	public Language() {
 		super();
 	}
+	
+	public Language(int id, String languageName, String code) {
+		super();
+		this.id = id;
+		this.languageName = languageName;
+		this.code = code;
+	}
+
+
 
 	public Language(String languageName, String code) {
 		
@@ -58,6 +67,12 @@ public class Language {
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+	
+	public String toString() {
+		
+		return languageName;
+		
 	}
 		
 }

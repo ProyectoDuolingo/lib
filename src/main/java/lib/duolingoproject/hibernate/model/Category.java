@@ -109,6 +109,10 @@ public class Category {
 		this.course = course;
 	}	
 	
-	
+	public String toString() {
+		
+		return categoryName;
+		
+	}
 
 }

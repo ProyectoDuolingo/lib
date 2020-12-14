@@ -53,35 +53,21 @@ public class CategoryDaoImpl implements ICategoryDao{
 	}
 	
 	public List<Category> getAllCategoriesByCourseId(long id) {
-		
-		Transaction transaction = null;
-		
-		List<Category> categoriesList = null;
-		
+			
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 			
-			// Start the transaction
-			
-			transaction = session.beginTransaction();
-			
-			// Get Categorys list
-			categoriesList = session.createQuery("from category where course id = " + id).list();
-			
-			// Commit the transaction
-			
-			transaction.commit();
+			// Get Categories list
+			List<Category> categoriesList = session.createSQLQuery("select * from category where course_id = " + id).addEntity(Category.class).list();
+						
+			return categoriesList;
 			
 		} catch (Exception e) {
 			
-			if (transaction != null) {
-				
-				transaction.rollback();
-				
-			}
+			e.printStackTrace();
+			
+			return null;
 			
 		}
-		
-		return categoriesList;
 		
 	}
 	

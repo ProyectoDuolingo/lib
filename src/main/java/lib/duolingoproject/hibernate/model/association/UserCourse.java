@@ -41,6 +41,10 @@ public class UserCourse { // Usamos esta clase para poder agregar columnas extra
 	@Column(name = "xp_points")
 	private int xpPoints;
 	
+	public UserCourse() {
+		
+	}
+	
 	public UserCourse(User user, Course course) {
 		
 		this.user = user;

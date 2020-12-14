@@ -8,8 +8,13 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -17,9 +22,18 @@ import javax.persistence.Table;
 @Table(name = "level")
 public class Level {
 	
-	@EmbeddedId
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private LevelId id;
+	private long id;
+
+//	@MapsId("category_id")
+//	@ManyToOne
+//	@JoinColumns({
+//		@JoinColumn(name = "category_id"),
+//		@JoinColumn(name = "course_id")
+//	})
+//	private Category category;
 	
 	@ManyToOne
 	@JoinColumn(name = "category_id")
@@ -36,6 +50,10 @@ public class Level {
 		this.levelName = levelName;
 		this.category = category;
 		this.exercises = new ArrayList<Exercise>();
+	}
+	
+	public Level() {
+		
 	}
 	
 	@Embeddable
@@ -74,10 +92,14 @@ public class Level {
 			return super.equals(obj);
 		}
 	}
-
-	public LevelId getId() {
+	
+	public long getId() {
 		return id;
 	}
+
+//	public LevelId getId() {
+//		return id;
+//	}
 
 	public Category getCategory() {
 		return category;
@@ -91,9 +113,9 @@ public class Level {
 		return exercises;
 	}
 
-	public void setId(LevelId id) {
-		this.id = id;
-	}
+//	public void setId(LevelId id) {
+//		this.id = id;
+//	}
 
 	public void setCategory(Category category) {
 		this.category = category;
@@ -105,6 +127,12 @@ public class Level {
 
 	public void setExercises(List<Exercise> exercises) {
 		this.exercises = exercises;
+	}
+	
+	public String toString() {
+		
+		return levelName;
+		
 	}
 
 }

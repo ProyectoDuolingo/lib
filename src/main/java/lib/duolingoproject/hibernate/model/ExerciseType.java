@@ -22,6 +22,10 @@ public class ExerciseType {
 	@Column(name = "xp_points")
 	private int xpPoints;
 	
+	public ExerciseType() {
+		
+	}
+	
 	public ExerciseType(int id, String exerciseName, int xpPoints) {
 		this.id = id;
 		this.exerciseName = exerciseName;

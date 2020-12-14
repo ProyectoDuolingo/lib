@@ -53,35 +53,21 @@ public class LanguageDaoImpl implements ILanguageDao{
 	}
 	
 	public List<Language> getAllLanguages() {
-		
-		Transaction transaction = null;
-		
-		List<Language> languagesList = null;
-		
+			
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 			
-			// Start the transaction
-			
-			transaction = session.beginTransaction();
-			
 			// Get Languages list
-			languagesList = session.createQuery("from language").list();
+			List<Language> languagesList = session.createCriteria(Language.class).list();
 			
-			// Commit the transaction
-			
-			transaction.commit();
+			return languagesList;
 			
 		} catch (Exception e) {
 			
-			if (transaction != null) {
-				
-				transaction.rollback();
-				
-			}
+			e.printStackTrace();
+			
+			return null;
 			
 		}
-		
-		return languagesList;
 		
 	}
 	

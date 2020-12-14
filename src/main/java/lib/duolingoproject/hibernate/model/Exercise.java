@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
@@ -28,12 +27,17 @@ public class Exercise {
 	@Column(name = "id")
 	private long id;
 			
-	@MapsId("level_id")
+//	@MapsId("level_id")
+//	@ManyToOne
+//	@JoinColumns({
+//		@JoinColumn(name = "level_id"),
+//		@JoinColumn(name = "category_id"),
+//		@JoinColumn(name = "course_id")
+//	})
+//	private Level level;
+	
 	@ManyToOne
-	@JoinColumns({
-		@JoinColumn(name = "level_id"),
-		@JoinColumn(name = "category_id")
-	})
+	@JoinColumn(name = "level_id")
 	private Level level;
 	
 	@ManyToOne
