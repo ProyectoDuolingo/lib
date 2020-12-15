@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,7 +43,7 @@ public class Level {
 	@Column(name = "level_name")
 	private String levelName;
 	
-	@OneToMany(mappedBy = "level")
+	@OneToMany(mappedBy = "level", fetch = FetchType.EAGER)
 	private List<Exercise> exercises;
 	
 	public Level(String levelName, Category category) {
@@ -57,7 +58,7 @@ public class Level {
 	}
 	
 	@Embeddable
-	public class LevelId implements Serializable { // Implementamos serializable para definir una clave primaria compuesta entre una "id" que determinara el numero de nivel, y la id de la categoria a la que pertenezca el nivel.
+	public class LevelId implements Serializable {
 		
 		private static final long serialVersionUID = 1L;
 		

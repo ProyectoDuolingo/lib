@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,7 +36,7 @@ public class Category {
 	@Column(name = "final_level")
 	private int finalLevel;
 	
-	@OneToMany(mappedBy = "category")
+	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
 	private List<Level> levels;
 	
 	@ManyToOne
@@ -46,6 +47,18 @@ public class Category {
 		
 	}
 	
+	public Category(long id, String categoryName, int initialLevel, int finalLevel, List<Level> levels, Course course) {
+		super();
+		this.id = id;
+		this.categoryName = categoryName;
+		this.initialLevel = initialLevel;
+		this.finalLevel = finalLevel;
+		this.levels = levels;
+		this.course = course;
+	}
+
+
+
 	public Category(String categoryName, Course course) {
 		this.categoryName = categoryName;
 		this.initialLevel = 1;
