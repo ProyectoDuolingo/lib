@@ -35,8 +35,30 @@ public class ExerciseType {
 	public ExerciseType(String exerciseName) {
 		
 		this.exerciseName = exerciseName;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public String getExerciseName() {
+		return exerciseName;
+	}
+
+	public int getXpPoints() {
+		return xpPoints;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setExerciseName(String exerciseName) {
+		this.exerciseName = exerciseName;
+	}
+
+	public void setXpPoints(int xpPoints) {
+		this.xpPoints = xpPoints;
 	}	
-	
-	
 
 }
