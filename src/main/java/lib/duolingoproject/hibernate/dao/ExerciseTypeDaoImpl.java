@@ -2,6 +2,7 @@ package lib.duolingoproject.hibernate.dao;
 
 import lib.duolingoproject.hibernate.dao.i.IExerciseTypeDao;
 import lib.duolingoproject.hibernate.model.ExerciseType;
+import lib.duolingoproject.hibernate.model.Level;
 import lib.duolingoproject.hibernate.util.HibernateUtil;
 
 import java.util.List;
@@ -25,26 +26,34 @@ public class ExerciseTypeDaoImpl implements IExerciseTypeDao{
 		ExerciseType exerciseType = null;
 		
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+						
+			exerciseType = (ExerciseType) session.get(ExerciseType.class, id);
 			
-			// Start the transaction
-			
-			transaction = session.beginTransaction();
-			
-			// Get ExerciseType object
-			
-			exerciseType = session.get(ExerciseType.class, id);
-			
-			// Commit the transaction
-			
-			transaction.commit();
+			return exerciseType;
 			
 		} catch (Exception e) {
 			
-			if (transaction != null) {
-				
-				transaction.rollback();
-				
-			}
+			return null;
+			
+		}
+		
+	}
+	
+	public ExerciseType getExerciseTypeByTypeName(String name) {
+		
+		Transaction transaction = null;
+		
+		ExerciseType exerciseType = null;
+		
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+						
+			// Get ExerciseType object
+			
+			exerciseType = (ExerciseType) session.createSQLQuery("select * from exercise_type where exercise_type_name = " + name).addEntity(ExerciseType.class);
+			
+		} catch (Exception e) {
+			
+			return null;
 			
 		}
 		
@@ -53,35 +62,19 @@ public class ExerciseTypeDaoImpl implements IExerciseTypeDao{
 	}
 	
 	public List<ExerciseType> getAllExercisesType() {
-		
-		Transaction transaction = null;
-		
-		List<ExerciseType> exercisesTypeList = null;
-		
+				
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-			
-			// Start the transaction
-			
-			transaction = session.beginTransaction();
-			
+						
 			// Get ExerciseType list
-			exercisesTypeList = session.createQuery("from exercise_type").list();
-			
-			// Commit the transaction
-			
-			transaction.commit();
+			List<ExerciseType> exercisesTypeList = session.createSQLQuery("select * from exercise_type").addEntity(ExerciseType.class).list();
+						
+			return exercisesTypeList;
 			
 		} catch (Exception e) {
 			
-			if (transaction != null) {
-				
-				transaction.rollback();
-				
-			}
+			return null;
 			
 		}
-		
-		return exercisesTypeList;
 		
 	}
 	
